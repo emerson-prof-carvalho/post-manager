@@ -13,8 +13,9 @@ public class DAOFactory {
 	static {
 		listDAOsInterfaces.put(PostDAO.class, new MySQLPostDAO());
 		listDAOsInterfaces.put(UserDAO.class, new MySQLUserDAO());
+		listDAOsInterfaces.put(CompanyDAO.class, new MySQLCompanyDAO());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static <DAOInterface> DAOInterface createDAO(Class<?> entity){
 		return (DAOInterface) listDAOsInterfaces.get(entity);

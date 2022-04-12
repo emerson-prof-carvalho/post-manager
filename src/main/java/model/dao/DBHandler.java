@@ -38,6 +38,18 @@ public class DBHandler {
 			throw new ModelException("Erro ao atribuir string", e);
 		}
 	}
+	
+	public void setDate(int i, Date value) throws ModelException {
+		validatePreparedStatement();
+		
+		try {
+			java.sql.Date date = new java.sql.Date(value.getTime());
+			preparedStatement.setDate(i, date);
+		} catch (SQLException e) {
+			close();
+			throw new ModelException("Erro ao atribuir data", e);
+		}
+	}
 
 	public void setInt(int i, int value) throws ModelException {
 		validatePreparedStatement();
