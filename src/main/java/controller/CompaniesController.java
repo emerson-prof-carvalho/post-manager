@@ -27,24 +27,9 @@ public class CompaniesController extends HttpServlet {
 		
 		switch (action) {
 		case "/post-manager/company/form": {
-			CompanyDAO dao = DAOFactory.createDAO(CompanyDAO.class);
-			
-			Company company = new Company();
-			company.setName("Face");
-			company.setRole("Programador");
-			company.setStart(Date.valueOf(java.time.LocalDate.now()));
-			company.setEnd(Date.valueOf(java.time.LocalDate.now()));
-			company.setUser(new User(1));
-			
-			try {
-				dao.save(company);
-			} catch (ModelException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			PrintWriter writer = resp.getWriter();
-			writer.append("Salvou");
+			CommonsController.listUsers(req);
+			req.setAttribute("action", "insert");
+			ControllerUtil.forward(req, resp, "/form-company.jsp");
 		}
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + action);

@@ -29,13 +29,13 @@ public class PostsController extends HttpServlet {
 		
 		switch (action) {
 		case "/post-manager/post/form": {
-			listUsers(req);
+			CommonsController.listUsers(req);
 			req.setAttribute("action", "insert");
 			ControllerUtil.forward(req, resp, "/form-post.jsp");
 			break;
 		}
 		case "/post-manager/post/update": {
-			listUsers(req);
+			CommonsController.listUsers(req);
 			Post p = loadPost(req);
 			req.setAttribute("post", p);
 			req.setAttribute("action", "update");
@@ -152,22 +152,6 @@ public class PostsController extends HttpServlet {
 			e.printStackTrace();
 			ControllerUtil.errorMessage(req, e.getMessage());
 		}
-	}
-
-	private void listUsers(HttpServletRequest req) {
-		UserDAO dao = DAOFactory.createDAO(UserDAO.class);
-		
-		List<User> users = null;
-		try {
-			users = dao.listAll();
-		} catch (ModelException e) {
-			// Log no servidor
-			e.printStackTrace();
-		}
-		
-		if (users != null)
-			req.setAttribute("users", users);
-		
 	}
 
 	private void deletePost(HttpServletRequest req, HttpServletResponse resp) {
