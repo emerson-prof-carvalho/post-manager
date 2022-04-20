@@ -62,8 +62,8 @@
 				                        </a>
 				                    </td>
 				                    <td class="actions">
-				                        <a class="btn btn-danger btn-xs modal-remove" post-id="${post.getId()}" 
-				                           post-content="${post.getContent()}" data-toggle="modal" 
+				                        <a class="btn btn-danger btn-xs modal-remove" company-id="${company.getId()}" 
+				                           company-name="${company.getName()}" data-toggle="modal" 
 				                           data-target="#delete-modal"  href="#"><span 
 				                           class="glyphicon glyphicon-trash"></span></a>
 				                    </td>
@@ -88,5 +88,25 @@
 	     	</div>
 		</div>
 		
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			    // fecha o alert após 3 segundos
+			    setTimeout(function() {
+			        $("#alert").slideUp(500);
+			    }, 3000);
+
+			    // Ao clicar no delete de alguma empresa, pega o nome da empresa, 
+			    // o id da empresa e a ação (delete) e envia para o modal 
+			    $(".modal-remove").click(function () {
+		            var companyName = $(this).attr('company-name');
+		            var companyId = $(this).attr('company-id');
+		            $(".modal-body #hiddenValue").text("empresa '"+companyName+"'");
+		            $("#id").attr( "value", companyId);
+		            $("#form").attr( "action","company/delete");
+		        })
+			});
+		</script>
 	</body>
 </html>
