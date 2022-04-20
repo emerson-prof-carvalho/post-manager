@@ -75,7 +75,6 @@ public class PostsController extends HttpServlet {
 		}
 		default:
 			System.out.println("URL inválida " + action);
-			break;
 		}
 			
 		ControllerUtil.redirect(resp, req.getContextPath() + "/posts");

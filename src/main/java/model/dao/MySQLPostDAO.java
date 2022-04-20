@@ -64,7 +64,7 @@ public class MySQLPostDAO implements PostDAO {
 		
 		List<Post> posts = new ArrayList<Post>();
 			
-		// Declara um instrução SQL
+		// Declara uma instrução SQL
 		String sqlQuery = " SELECT u.id AS user_id, p.*, "
 				        + " p.post_date "
 				        + " FROM users u "
