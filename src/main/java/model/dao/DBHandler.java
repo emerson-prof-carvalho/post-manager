@@ -39,6 +39,17 @@ public class DBHandler {
 		}
 	}
 	
+	public void setNullDate(int i) throws ModelException {
+		validatePreparedStatement();
+		
+		try {
+			preparedStatement.setNull(i, java.sql.Types.DATE);
+		} catch (SQLException e) {
+			close();
+			throw new ModelException("Erro ao atribuir null", e);
+		}
+	}
+	
 	public void setDate(int i, Date value) throws ModelException {
 		validatePreparedStatement();
 		

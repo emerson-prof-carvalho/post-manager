@@ -1,7 +1,9 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -14,7 +16,6 @@ import model.ModelException;
 import model.User;
 import model.dao.CompanyDAO;
 import model.dao.DAOFactory;
-import model.dao.PostDAO;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = {"/companies", "/company/form", "/company/delete", "/company/insert", "/company/update"})
@@ -80,10 +81,27 @@ public class CompaniesController extends HttpServlet {
 		String companyName = req.getParameter("name");
 		String role = req.getParameter("role");
 		Integer userId = Integer.parseInt(req.getParameter("user"));
-
+		String start = req.getParameter("start");
+		String end = req.getParameter("end");
+		
 		Company company = new Company();
 		company.setName(companyName);
 		company.setRole(role);
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate = null;
+		try {
+			startDate = dateFormat.parse(start);
+		} catch (ParseException pe) {
+			startDate = new Date();
+		}
+		company.setStart(startDate);
+		
+		Date endDate = null;
+		try {
+			endDate = dateFormat.parse(end);
+		} catch (ParseException pe) {}
+		company.setEnd(endDate);
 
 		User user = new User(userId);
 		company.setUser(user);

@@ -46,7 +46,11 @@
 			                <tr>
 			                    <th>Nome da Empresa</th>
 			                    <th>Cargo</th>
-			                    <th>Usuário</th>			                    
+			                    <th>Usuário</th>
+			                    <th>Data de início</th>
+			                    <th>Dada de saída</th>
+			                    <th>Editar</th>
+			                    <th>Excluir</th>			                    
 			                 </tr>
 			            </thead>
 			            <tbody>
@@ -54,7 +58,9 @@
 								<tr>
 				                    <td>${company.getName()}</td>
 				                    <td>${company.getRole()}</td>
-				                    <td>${company.getUser().getName()}</td>				                    
+				                    <td>${company.getUser().getName()}</td>
+				                    <td>${company.getStart()}</td>
+				                    <td>${company.getEnd()}</td>				                    
 				                    <td class="actions">
 				                        <a class="btn btn-info btn-xs" 
 				                           href="${pageContext.request.contextPath}/post/update?postId=${post.getId()}" >

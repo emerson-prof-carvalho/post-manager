@@ -48,6 +48,24 @@
 						</select>
 					</div>
 				</div>
+				<hr/>
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="content">Data Início</label>
+						<input type="date" class="form-control" id="start" name="start" 
+							   autofocus="autofocus" placeholder="Início na empresa" 
+							   required oninvalid="this.setCustomValidity('Por favor, informe a data de inícion na empresa.')"
+							   oninput="setCustomValidity('')"
+							   value="${company.getStart()}">
+					</div>
+					
+					<div class="form-group col-md-6">
+						<label for="content">Data Saída</label>
+						<input type="date" class="form-control" id="end" name="end" 
+							   autofocus="autofocus" placeholder="Saída da empresa"
+							   value="${company.getEnd()}">
+					</div>
+				</div>
 				
 				<hr />
 				<div id="actions" class="row pull-right">
