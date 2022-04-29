@@ -54,7 +54,7 @@
 						<label for="content">Data Início</label>
 						<input type="date" class="form-control" id="start" name="start" 
 							   autofocus="autofocus" placeholder="Início na empresa" 
-							   required oninvalid="this.setCustomValidity('Por favor, informe a data de inícion na empresa.')"
+							   required oninvalid="this.setCustomValidity('Por favor, informe a data de início na empresa.')"
 							   oninput="setCustomValidity('')"
 							   value="${company.getStart()}">
 					</div>

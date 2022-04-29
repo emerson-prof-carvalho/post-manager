@@ -63,7 +63,7 @@
 				                    <td>${company.getEnd()}</td>				                    
 				                    <td class="actions">
 				                        <a class="btn btn-info btn-xs" 
-				                           href="${pageContext.request.contextPath}/post/update?postId=${post.getId()}" >
+				                           href="${pageContext.request.contextPath}/company/update?companyId=${company.getId()}" >
 				                           <span class="glyphicon glyphicon-edit"></span>
 				                        </a>
 				                    </td>

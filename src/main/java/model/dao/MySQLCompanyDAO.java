@@ -1,12 +1,12 @@
 package model.dao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import model.Company;
 import model.ModelException;
+import model.Post;
 import model.User;
 
 public class MySQLCompanyDAO implements CompanyDAO {
@@ -34,8 +34,31 @@ public class MySQLCompanyDAO implements CompanyDAO {
 
 	@Override
 	public boolean update(Company company) throws ModelException {
-		// TODO Auto-generated method stub
-		return false;
+		DBHandler db = new DBHandler();
+		
+		String sqlUpdate = "UPDATE companies "
+				+ " SET name = ?, "
+				+ " role = ?, "
+				+ " start = ?, "
+				+ " end = ?, "
+				+ " user_id = ? "
+				+ " WHERE id = ?; "; 
+		
+		db.prepareStatement(sqlUpdate);
+		
+		db.setString(1, company.getName());
+		db.setString(2, company.getRole());
+		
+		db.setDate(3, company.getStart() == null ? new Date() : company.getStart());
+		
+		if (company.getEnd() == null)
+			db.setNullDate(4);
+		else db.setDate(4, company.getEnd());
+		
+		db.setInt(5, company.getUser().getId());
+		db.setInt(6, company.getId());
+		
+		return db.executeUpdate() > 0;
 	}
 
 	@Override
@@ -81,7 +104,29 @@ public class MySQLCompanyDAO implements CompanyDAO {
 
 	@Override
 	public Company findById(int id) throws ModelException {
-		// TODO Auto-generated method stub
-		return null;
+		DBHandler db = new DBHandler();
+		
+		String sql = "SELECT * FROM companies WHERE id = ?;";
+		
+		db.prepareStatement(sql);
+		db.setInt(1, id);
+		db.executeQuery();
+		
+		Company c = null;
+		while (db.next()) {
+			c = new Company(id);
+			c.setName(db.getString("name"));
+			c.setRole(db.getString("role"));
+			c.setStart(db.getDate("start"));
+			c.setEnd(db.getDate("end"));
+			
+			UserDAO userDAO = DAOFactory.createDAO(UserDAO.class); 
+			User user = userDAO.findById(db.getInt("user_id"));
+			c.setUser(user);
+			
+			break;
+		}
+		
+		return c;
 	}
 }
