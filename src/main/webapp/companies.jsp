@@ -108,7 +108,7 @@
 			    $(".modal-remove").click(function () {
 		            var companyName = $(this).attr('company-name');
 		            var companyId = $(this).attr('company-id');
-		            $(".modal-body #hiddenValue").text("empresa '"+companyName+"'");
+		            $(".modal-body #hiddenValue").text("a empresa '"+companyName+"'");
 		            $("#id").attr( "value", companyId);
 		            $("#form").attr( "action","company/delete");
 		        })

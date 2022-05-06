@@ -45,7 +45,6 @@ public class MySQLPostDAO implements PostDAO {
 
 	@Override
 	public boolean delete(Post post) throws ModelException {
-		
 		DBHandler db = new DBHandler();
 		
 		String sqlDelete = " DELETE FROM posts "

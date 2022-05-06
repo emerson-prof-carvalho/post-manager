@@ -13,11 +13,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Company;
 import model.ModelException;
-import model.Post;
 import model.User;
 import model.dao.CompanyDAO;
 import model.dao.DAOFactory;
-import model.dao.PostDAO;
+import model.dao.UserDAO;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = {"/companies", "/company/form", "/company/delete", "/company/insert", "/company/update"})
@@ -68,11 +67,41 @@ public class CompaniesController extends HttpServlet {
 			updateCompany(req, resp);
 			break;
 		}
+		case "/post-manager/company/delete":{
+			deleteCompany(req, resp);
+			break;
+		}
 		default:
-			throw new IllegalArgumentException("Unexpected value: " + action);
+			System.out.println("URL inválida " + action);
 		}
 
 		ControllerUtil.redirect(resp, req.getContextPath() + "/companies");
+	}
+
+	private void deleteCompany(HttpServletRequest req, HttpServletResponse resp) {
+		String companyIdParameter = req.getParameter("id");
+		
+		int companyId = Integer.parseInt(companyIdParameter);
+		
+		CompanyDAO dao = DAOFactory.createDAO(CompanyDAO.class);
+		
+		try {
+			Company company = dao.findById(companyId);
+			
+			if (company == null)
+				throw new ModelException("Empresa não encontrada para deleção.");
+			
+			if (dao.delete(company)) {
+				ControllerUtil.sucessMessage(req, "Empresa '" + company.getName() + "' deletada com sucesso.");
+			}
+			else {
+				ControllerUtil.errorMessage(req, "Empresa '" + company.getName() + "' não pode ser deletada.");
+			}
+		} catch (ModelException e) {
+			// log no servidor
+			e.printStackTrace();
+			ControllerUtil.errorMessage(req, e.getMessage());
+		}
 	}
 
 	private void updateCompany(HttpServletRequest req, HttpServletResponse resp) {

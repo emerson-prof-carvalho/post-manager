@@ -6,7 +6,6 @@ import java.util.List;
 
 import model.Company;
 import model.ModelException;
-import model.Post;
 import model.User;
 
 public class MySQLCompanyDAO implements CompanyDAO {
@@ -63,8 +62,15 @@ public class MySQLCompanyDAO implements CompanyDAO {
 
 	@Override
 	public boolean delete(Company company) throws ModelException {
-		// TODO Auto-generated method stub
-		return false;
+		DBHandler db = new DBHandler();
+		
+		String sqlDelete = " DELETE FROM companies "
+		         + " WHERE id = ?;";
+
+		db.prepareStatement(sqlDelete);		
+		db.setInt(1, company.getId());
+		
+		return db.executeUpdate() > 0;
 	}
 
 	@Override

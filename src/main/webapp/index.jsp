@@ -103,7 +103,7 @@
 			    $(".modal-remove").click(function () {
 		            var postContent = $(this).attr('post-content');
 		            var postId = $(this).attr('post-id');
-		            $(".modal-body #hiddenValue").text("post '"+postContent+"'");
+		            $(".modal-body #hiddenValue").text("o post '"+postContent+"'");
 		            $("#id").attr( "value", postId);
 		            $("#form").attr( "action","post/delete");
 		        })

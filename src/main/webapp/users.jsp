@@ -104,7 +104,7 @@
 			    $(".modal-remove").click(function () {
 		            var userName = $(this).attr('user-name');
 		            var userId = $(this).attr('user-id');
-		            $(".modal-body #hiddenValue").text("usuário '"+userName+"'");
+		            $(".modal-body #hiddenValue").text("o usuário '"+userName+"'");
 		            $("#id").attr( "value", userId);
 		            $("#form").attr( "action","user/delete");
 		        })
